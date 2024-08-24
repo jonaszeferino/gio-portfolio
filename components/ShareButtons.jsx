@@ -3,7 +3,7 @@ import { IconButton, HStack, Button, Icon } from '@chakra-ui/react';
 import { FaWhatsapp, FaFacebook } from 'react-icons/fa';
 
 const ShareButtons = ({ id, title }) => {
-  const baseUrl = 'https://saladesecacao.com.br/pagina-do-artigo?id=';
+  const baseUrl = 'https://www.giovanizeferino.site/pagina-do-artigo?id=';
   const fullUrl = `${baseUrl}${id}`;
 
   const encodedUrl = encodeURIComponent(fullUrl);

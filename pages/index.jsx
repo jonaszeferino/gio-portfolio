@@ -13,7 +13,6 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { Navbar } from '../components/Navbar';
-import { Social } from '../components/Social';
 import { useEffect, useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -25,7 +24,6 @@ const News = () => {
   const [totalPages, setTotalPages] = useState(1); // Adicione esta linha
 
   const getNews = async (page = 1) => {
-    // Modifique a função para atualizar totalPages
     try {
       const response = await fetch(`/api/articlesToSite?page=${page}`, {
         method: 'GET',
@@ -91,7 +89,7 @@ const News = () => {
         {data.map((item, index) => (
           <Card
             key={index}
-            direction="row"
+            direction={['column', 'row']} // Alterado para coluna no mobile
             overflow="hidden"
             variant="outline"
             _hover={{
@@ -99,52 +97,47 @@ const News = () => {
               transform: 'scale(1.02)',
               transition: '0.3s',
             }}
+            p={4}
           >
-            <Stack direction={['column', 'row']} w="100%">
-              <NextLink href={`/pagina-do-artigo?id=${item.id}`} passHref>
-                <Image
-                  objectFit="cover"
-                  boxSize={['100%', '350px']}
-                  src={item.image_link}
-                  alt={item.article_title}
-                  loading="lazy"
-                  borderRadius="md"
-                />
-              </NextLink>
-
-              <Stack w="100%">
-                <CardBody>
-                  <Heading fontSize="lg" textTransform="uppercase" w="100%">
-                    {item.article_title}
-                  </Heading>
-                  <Box pt="20px" w="100%">
-                    <Text
-                      dangerouslySetInnerHTML={{
-                        __html: truncateHtml(item.article_main, 250),
-                      }}
-                      sx={{ textAlign: 'justify' }}
-                    />
-                    <NextLink href={`/pagina-do-artigo?id=${item.id}`} passHref>
-                      <Center>
-                        <Button ml="10px" variant="solid" colorScheme="blue">
-                          Veja mais
-                        </Button>
-                      </Center>
-                    </NextLink>
-                  </Box>
-                </CardBody>
-                <CardFooter flexDirection="column" gap="10px" w="100%">
-                  <Flex justify="space-between" w="100%">
-                    <Text>Fonte: {item.reporter_name}</Text>
-                    <Text>
-                      {formatDistanceToNow(new Date(item.publicated_date), {
-                        addSuffix: true,
-                        locale: ptBR,
-                      })}
-                    </Text>
-                  </Flex>
-                </CardFooter>
-              </Stack>
+            <NextLink href={`/pagina-do-artigo?id=${item.id}`} passHref>
+              <Image
+                objectFit="cover"
+                boxSize={['100%', '200px']} // Alterado para 100% no mobile
+                height="100%" // Mantém a altura do card
+                src={item.image_link}
+                alt={item.article_title}
+                loading="lazy"
+                borderRadius="md"
+              />
+            </NextLink>
+            <Stack w="100%" mt={4}>
+              <CardBody>
+                <Heading fontSize="lg" textTransform="uppercase" w="100%">
+                  {item.article_title}
+                </Heading>
+                <Box pt="20px" w="100%">
+                  <Text
+                    dangerouslySetInnerHTML={{
+                      __html: truncateHtml(item.article_main, 250),
+                    }}
+                    sx={{ textAlign: 'justify' }}
+                  />
+                </Box>
+              </CardBody>
+              <CardFooter flexDirection={['column', 'row']} justify="space-between" w="100%">
+                <Text>Fonte: {item.reporter_name}</Text>
+                <Text>
+                  {formatDistanceToNow(new Date(item.publicated_date), {
+                    addSuffix: true,
+                    locale: ptBR,
+                  })}
+                </Text>
+                <NextLink href={`/pagina-do-artigo?id=${item.id}`} passHref>
+                  <Button w="100%" variant="solid" colorScheme="blue">
+                    Veja mais
+                  </Button>
+                </NextLink>
+              </CardFooter>
             </Stack>
           </Card>
         ))}
