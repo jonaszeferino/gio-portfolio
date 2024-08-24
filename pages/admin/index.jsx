@@ -1,20 +1,5 @@
 import Head from 'next/head';
-import {
-  ChakraProvider,
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  VStack,
-  Text,
-  Center,
-  HStack,
-  Grid,
-  Heading,
-  Divider,
-  Image,
-} from '@chakra-ui/react';
+import { ChakraProvider, Center, Heading, Divider } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import LoggedUser from '../../components/LoggedUser';
 import { supabase } from '../../utils/supabaseClientAdmin';

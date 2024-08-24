@@ -12,48 +12,53 @@ export default async function handler(req, res) {
 }
 
 async function handleGet(req, res) {
-  const { id } = req.query;
+  const { id, page = 1 } = req.query;
 
   try {
     const client = await pool.connect();
     try {
-      // Obter a data atual no fuso horário de São Paulo e formatá-la para 'YYYY-MM-DD HH:mm:ss+00'
-      const currentBrazilTime = moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss+00');
+      const currentBrazilTime = moment()
+        .tz('America/Sao_Paulo')
+        .format('YYYY-MM-DD HH:mm:ss+00');
       console.log('Current Brazil Time:', currentBrazilTime);
 
-      // Construir a query
-      let queryText = 'SELECT * FROM articles WHERE publicated_date < $1 AND is_visible = true';
+      let queryText =
+        'SELECT * FROM articles WHERE publicated_date < $1 AND is_visible = true AND site_article = 1';
       const queryValues = [currentBrazilTime];
 
+      // Adicionar o filtro de ID apenas se o ID for fornecido
       if (id) {
         queryText += ' AND id = $2';
-        queryValues.push(parseInt(id, 10));
+        queryValues.push(parseInt(id, 10)); // Certifique-se de que o ID é um número inteiro
       }
 
-      queryText += ' ORDER BY publicated_date DESC';
+      const limit = 10;
+      const offset = (page - 1) * limit;
+      queryText += ` ORDER BY publicated_date DESC LIMIT $${queryValues.length + 1} OFFSET $${queryValues.length + 2}`;
+      queryValues.push(limit, offset);
 
       console.log('Executing query:', queryText, 'with values:', queryValues);
 
-      // Executar a query
       const result = await client.query(queryText, queryValues);
 
-      console.log('Query result:', result.rows);
+      const totalPages = Math.ceil(result.rowCount / limit); // Usar rowCount para o cálculo de páginas
+      const response = {
+        articles: result.rows,
+        totalPages: totalPages,
+        currentPage: parseInt(page, 10),
+      };
 
-      res.status(200).json(result.rows);
+      console.log('Query result:', response);
+
+      res.status(200).json(response);
     } catch (error) {
       console.error('Error executing query:', error);
       res.status(500).json({ error: error.message || 'Unknown error' });
     } finally {
-      try {
-        client.release();
-      } catch (releaseError) {
-        console.error('Error releasing client back to pool:', releaseError);
-        res.status(500).json({ error: 'Failed to release database client.' });
-      }
+      client.release();
     }
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: error.message || 'Unknown error' });
   }
 }
-
