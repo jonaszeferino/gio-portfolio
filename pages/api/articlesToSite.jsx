@@ -24,8 +24,6 @@ async function handleGet(req, res) {
 
       let queryText;
       const queryValues = [currentBrazilTime];
-
-      // Se um ID for fornecido, buscar apenas esse artigo
       if (id) {
         queryText = 'SELECT * FROM articles WHERE id = $1'; // Alterar a consulta para pegar apenas o artigo pelo ID
         queryValues[0] = parseInt(id, 10); // Atualizar o valor da consulta

@@ -168,7 +168,7 @@ const News = () => {
           </Button>
         </Flex>
       </Center>
-      {/* <Social /> */}
+      <br/>
     </Flex>
   );
 };

@@ -78,7 +78,7 @@ const App = () => {
         <br />
         <Breadcrumb m={10}>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/artigos">Artigos</BreadcrumbLink>
+            <BreadcrumbLink href="/">Artigos</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbItem isCurrentPage>
             <BreadcrumbLink href="#">Página do Artigo</BreadcrumbLink>
