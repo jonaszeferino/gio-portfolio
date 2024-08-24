@@ -106,8 +106,9 @@ const App = () => {
               </Center>
               <br />
               <Text mt={2}>Por: {news.reporter_name}</Text>
-              <Text mt={2} mb={2}>
+              <Text mt={2} mb={2} display="flex" alignItems="center">
                 Data: {moment(news.publicated_date).format('DD/MM/YYYY')}
+                <Text as="span" ml={2} fontSize="sm">({moment(news.publicated_date).fromNow()})</Text>
               </Text>
               <Center>
                 <br />
@@ -156,10 +157,7 @@ const App = () => {
           ))}
         </Center>
         <br />
-        <br />
-        
-          {/* <Social /> */}
-        
+        <br />        
         <br />
       </ChakraProvider>
     </>
