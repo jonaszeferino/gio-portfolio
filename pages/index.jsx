@@ -24,7 +24,8 @@ const News = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1); // Adicione esta linha
 
-  const getNews = async (page = 1) => { // Modifique a função para atualizar totalPages
+  const getNews = async (page = 1) => {
+    // Modifique a função para atualizar totalPages
     try {
       const response = await fetch(`/api/articlesToSite?page=${page}`, {
         method: 'GET',
@@ -124,9 +125,11 @@ const News = () => {
                       sx={{ textAlign: 'justify' }}
                     />
                     <NextLink href={`/pagina-do-artigo?id=${item.id}`} passHref>
-                      <Button ml="10px" variant="solid" colorScheme="blue">
-                        Veja mais
-                      </Button>
+                      <Center>
+                        <Button ml="10px" variant="solid" colorScheme="blue">
+                          Veja mais
+                        </Button>
+                      </Center>
                     </NextLink>
                   </Box>
                 </CardBody>
@@ -156,7 +159,11 @@ const News = () => {
             Anterior
           </Button>
 
-          <Button onClick={() => getNews(currentPage + 1)} p={2} isDisabled={currentPage === totalPages}>
+          <Button
+            onClick={() => getNews(currentPage + 1)}
+            p={2}
+            isDisabled={currentPage === totalPages}
+          >
             Próximo
           </Button>
         </Flex>

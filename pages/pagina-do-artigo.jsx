@@ -35,7 +35,8 @@ const App = () => {
       if (response.ok) {
         const dataRecive = await response.json();
         console.log('Dados do artigo:', dataRecive);
-        setDataNews(Array.isArray(dataRecive) ? dataRecive : []);
+        // Atualizando para acessar o array de artigos
+        setDataNews(Array.isArray(dataRecive.articles) ? dataRecive.articles : []);
         setIsLoading(false);
       } else {
         setIsLoading(false);

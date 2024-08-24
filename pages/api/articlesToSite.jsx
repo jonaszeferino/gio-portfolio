@@ -22,26 +22,28 @@ async function handleGet(req, res) {
         .format('YYYY-MM-DD HH:mm:ss+00');
       console.log('Current Brazil Time:', currentBrazilTime);
 
-      let queryText =
-        'SELECT * FROM articles WHERE publicated_date < $1 AND is_visible = true AND site_article = 1';
+      let queryText;
       const queryValues = [currentBrazilTime];
 
-      // Adicionar o filtro de ID apenas se o ID for fornecido
+      // Se um ID for fornecido, buscar apenas esse artigo
       if (id) {
-        queryText += ' AND id = $2';
-        queryValues.push(parseInt(id, 10)); // Certifique-se de que o ID é um número inteiro
+        queryText = 'SELECT * FROM articles WHERE id = $1'; // Alterar a consulta para pegar apenas o artigo pelo ID
+        queryValues[0] = parseInt(id, 10); // Atualizar o valor da consulta
+      } else {
+        queryText =
+          'SELECT * FROM articles WHERE publicated_date < $1 AND is_visible = true AND site_article = 1';
+        
+        const limit = 10;
+        const offset = (page - 1) * limit;
+        queryText += ` ORDER BY publicated_date DESC LIMIT $2 OFFSET $3`;
+        queryValues.push(limit, offset);
       }
-
-      const limit = 10;
-      const offset = (page - 1) * limit;
-      queryText += ` ORDER BY publicated_date DESC LIMIT $${queryValues.length + 1} OFFSET $${queryValues.length + 2}`;
-      queryValues.push(limit, offset);
 
       console.log('Executing query:', queryText, 'with values:', queryValues);
 
       const result = await client.query(queryText, queryValues);
 
-      const totalPages = Math.ceil(result.rowCount / limit); // Usar rowCount para o cálculo de páginas
+      const totalPages = Math.ceil(result.rowCount / 10); // Usar rowCount para o cálculo de páginas
       const response = {
         articles: result.rows,
         totalPages: totalPages,

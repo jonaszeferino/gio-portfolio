@@ -22,7 +22,7 @@ export const Navbar = () => {
     <Box bg="gray.800" py={4} w="100%">
       {isMobile ? (
         <Flex direction="column" align="center" gap="10px">
-          <HStack>
+          {/* <HStack>
             <IconButton
               icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
               aria-label="Toggle Navigation"
@@ -31,9 +31,9 @@ export const Navbar = () => {
               color="white"
               size="lg"
             />
-          </HStack>
+          </HStack> */}
 
-          {isOpen && (
+          
             <Stack spacing={4} mt={4}>
               <WrapItem>
                 <Avatar
@@ -76,7 +76,7 @@ export const Navbar = () => {
                 Meu Currículo
               </Link>
             </Stack>
-          )}
+          
         </Flex>
       ) : (
         <Flex align="center" justify="left" gap="20px" ml="20px">
