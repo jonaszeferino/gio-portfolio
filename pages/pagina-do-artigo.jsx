@@ -157,9 +157,9 @@ const App = () => {
         </Center>
         <br />
         <br />
-        <Center>
-          <Social />
-        </Center>
+        
+          {/* <Social /> */}
+        
         <br />
       </ChakraProvider>
     </>
