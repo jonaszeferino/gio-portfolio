@@ -150,7 +150,7 @@ const Tips = () => {
             px={{ base: '4', md: '0' }}
           >
             <Tabs variant="enclosed" size={{ base: 'sm', md: 'md' }} isLazy>
-              <TabList overflowX={{ base: 'auto', md: 'initial' }}>
+              <TabList overflowX={{ base: 'auto', md: 'initial' }} overflowY="hidden">
                 <HStack spacing={{ base: 2, md: 4 }} minWidth="max-content">
                   <Tab fontSize={{ base: '12px', md: '14px' }} h="50px">
                     Informações Pessoais
