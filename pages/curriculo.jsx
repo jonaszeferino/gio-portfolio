@@ -152,20 +152,24 @@ const Tips = () => {
             <Tabs variant="enclosed" size={{ base: 'sm', md: 'md' }} isLazy>
               <TabList overflowX={{ base: 'auto', md: 'initial' }}>
                 <HStack spacing={{ base: 2, md: 4 }} minWidth="max-content">
-                  <Tab fontSize={{ base: '12px', md: '14px' }}>
+                  <Tab fontSize={{ base: '12px', md: '14px' }} h="50px">
                     Informações Pessoais
                   </Tab>
-                  <Tab fontSize={{ base: '12px', md: '14px' }}>Educação</Tab>
-                  <Tab fontSize={{ base: '12px', md: '14px' }}>
+                  <Tab fontSize={{ base: '12px', md: '14px' }} h="50px">
+                    Educação
+                  </Tab>
+                  <Tab fontSize={{ base: '12px', md: '14px' }} h="50px">
                     Qualificações
                   </Tab>
-                  <Tab fontSize={{ base: '12px', md: '14px' }}>
+                  <Tab fontSize={{ base: '12px', md: '14px' }} h="50px">
                     Experiência Profissional
                   </Tab>
-                  <Tab fontSize={{ base: '12px', md: '14px' }}>
+                  <Tab fontSize={{ base: '12px', md: '14px' }} h="50px">
                     Informações Complementares
                   </Tab>
-                  <Tab fontSize={{ base: '12px', md: '14px' }}>Meus Links</Tab>
+                  <Tab fontSize={{ base: '12px', md: '14px' }} h="50px">
+                    Meus Links
+                  </Tab>
                 </HStack>
               </TabList>
 
