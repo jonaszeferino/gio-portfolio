@@ -404,7 +404,7 @@ const Tips = () => {
                   <VStack align="start" fontSize={{ base: '12px', md: '14px' }}>
                     <Text>
                       <a
-                        href="https://www.linkedin.com/in/seu-perfil"
+                        href="https://www.linkedin.com/in/giovani-zeferino-15505857/"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -413,7 +413,7 @@ const Tips = () => {
                     </Text>
                     <Text>
                       <a
-                        href="https://www.youtube.com/seu-canal"
+                        href="https://www.youtube.com/@SaladeSecacao"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -422,7 +422,7 @@ const Tips = () => {
                     </Text>
                     <Text>
                       <a
-                        href="https://twitter.com/seu-usuario"
+                        href="https://x.com/SaladeSecacao"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
