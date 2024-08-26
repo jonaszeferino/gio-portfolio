@@ -17,6 +17,7 @@ import { Navbar } from '../components/Navbar';
 import { useRouter } from 'next/router';
 import { Social } from '../components/Social';
 import ShareButtons from '@/components/ShareButtons';
+import { FaFileAlt } from 'react-icons/fa'; // Importar o ícone
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -112,15 +113,30 @@ const App = () => {
               </Text>
               <Center>
                 <br />
-                <Box
-                  as="img"
-                  src={news.image_link}
-                  alt={news.article_title}
-                  borderRadius="md"
-                  width={'1200px'}
-                  objectFit="cover"
-                  mb={2}
-                />
+                {news.image_link ? ( // Verifica se há imagem
+                  <Box
+                    as="img"
+                    src={news.image_link}
+                    alt={news.article_title}
+                    borderRadius="md"
+                    width={'1200px'}
+                    objectFit="cover"
+                    mb={2}
+                  />
+                ) : (
+                  <Box
+                    width="1200px" // Largura do box quando não há imagem
+                    height="200px" // Altura do box quando não há imagem
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    borderRadius="md"
+                    border="1px solid"
+                    borderColor="gray.200"
+                  >
+                    <FaFileAlt size="50px" /> {/* Ícone representando um artigo */}
+                  </Box>
+                )}
               </Center>
               <Center>
                 <Text

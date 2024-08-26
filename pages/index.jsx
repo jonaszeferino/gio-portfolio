@@ -16,6 +16,7 @@ import { Navbar } from '../components/Navbar';
 import { useEffect, useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { FaFileAlt } from 'react-icons/fa'; // Importar o ícone
 
 const News = () => {
   const [data, setData] = useState([]);
@@ -100,15 +101,29 @@ const News = () => {
             p={4}
           >
             <NextLink href={`/pagina-do-artigo?id=${item.id}`} passHref>
-              <Image
-                objectFit="cover"
-                boxSize={['100%', '200px']} // Alterado para 100% no mobile
-                height="100%" // Mantém a altura do card
-                src={item.image_link}
-                alt={item.article_title}
-                loading="lazy"
-                borderRadius="md"
-              />
+              {item.image_link ? ( // Verifica se há imagem
+                <Image
+                  objectFit="cover"
+                  boxSize={['100%', '200px']} // Alterado para 100% no mobile
+                  height="100%" // Mantém a altura do card
+                  src={item.image_link}
+                  alt={item.article_title}
+                  loading="lazy"
+                  borderRadius="md"
+                />
+              ) : (
+                <Box
+                  boxSize={['100%', '200px']} // Tamanho do box quando não há imagem
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  borderRadius="md"
+                  border="1px solid"
+                  borderColor="gray.200"
+                >
+                  <FaFileAlt size="50px" /> {/* Ícone representando um artigo */}
+                </Box>
+              )}
             </NextLink>
             <Stack w="100%" mt={4}>
               <CardBody>
